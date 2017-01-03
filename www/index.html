@@ -40,6 +40,9 @@
 
     <link rel="stylesheet" type="text/css" href="css/index.css" />
     <title>Hello World</title>
+    <button onclick="getCurrentSSID()">Get Current SSID</button> 
+    <button onclick="getWifiList()">Get configured SSID list</button> 
+    <button onclick="getScanResult()">Get Scan result</button> 
 </head>
 
 <body>
@@ -54,6 +57,31 @@
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript">
         app.initialize();
+
+        //If you want to get the current SSID of the network you are connected to:
+        function ssidHandler(s) {
+            alert("Current SSID"+s);
+        }
+        function fail(e) {
+            alert("Failed"+e);
+        }
+        function getCurrentSSID() {
+            WifiWizard.getCurrentSSID(ssidHandler, fail);
+        }
+        //If you want to get the list of SSID you have configured before :
+        function listHandler(a) {
+            alert(a);
+        }
+        function getWifiList() {
+           WifiWizard.listNetworks(listHandler, fail);
+        }
+        //If you want to return a complete scan result :
+        function listHandler2(a) {
+            alert(JSON.stringify(a));
+        }
+        function getScanResult() {
+            WifiWizard.getScanResults(listHandler2, fail);
+        }
     </script>
 </body>
 
